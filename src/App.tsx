@@ -10,7 +10,7 @@ interface Quote {
 export default function App() {
   const [quote, setQuote] = useState<Quote | null>(null);
   const fetchQuote = async (targetId: number) => {
-    const response = await fetch("/quotes.json");
+    const response = await fetch("./quotes.json");
     const allQuotes = (await response.json()) as Quote[];
     const target = allQuotes.find((item) => item.id === targetId);
     setQuote(target || null);
