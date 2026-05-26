@@ -1,12 +1,25 @@
 import { randomQuoteId } from "./Generator.ts";
 import { useState } from "react";
 
+interface Quote {
+  id: number;
+  quote: string;
+  author: string;
+}
 export default function App() {
-  const [quoteId, setQuoteId] = useState(0);
-  const handleClick = () => {
-    const newId = randomQuoteId();
-    setQuoteId(newId);
+  const [quote, setQuote] = useState<Quote | null>(null); 
+  const fetchQuote = async (targetId: number) => {
+    const response = await fetch("/quotes.json");
+    const allQuotes = (await response.json()) as Quote[];
+    const target = allQuotes.find((item) => item.id === targetId);
+    setQuote(target || null);
   }
+
+  const handleClick = () => {
+    const targetId = randomQuoteId();
+    fetchQuote(targetId); 
+  }
+
   return (
     <>
     <div className="bg-slate-50 min-h-screen flex flex-col items-center justify-center">
@@ -26,15 +39,14 @@ export default function App() {
       >
         Generate
       </button>
-      <div id="result">結果(デバッグ): {quoteId}</div>
       <div className="bg-linear-90 from-blue-600 via-blue-700 to-blue-800 text-white rounded-2xl mt-8 py-24 px-8 flex flex-col items-center justify-center gap-16">
-        <div className="quotes">
+        <div className="">
           <p>
-            名言を言ってるよ。名言を言ってるよ。名言を言ってるよ。名言を言ってるよ。
+            {quote?.quote}
           </p>
         </div>
-        <div className="author">
-          <p>作者名</p>
+        <div className="">
+          <p>{quote?.author}</p>
         </div>
       </div>
     </div>
