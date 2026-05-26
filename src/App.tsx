@@ -39,7 +39,7 @@ export default function App() {
         >
           Generate
         </button>
-        <div className="w-full max-w-2xl bg-linear-90  h-[320px]   from-blue-600 via-blue-700 to-blue-800 text-white rounded-2xl mt-8 p-12 flex flex-col items-center justify-center gap-16">
+        <div className="w-full max-w-2xl bg-linear-90  h-80   from-blue-600 via-blue-700 to-blue-800 text-white rounded-2xl mt-8 p-12 flex flex-col items-center justify-center gap-16">
           <div className="flex-1 flex items-center justify-center overflow-y-auto">
             <p className="text-lg italic text-center">{quote?.quote}</p>
           </div>
