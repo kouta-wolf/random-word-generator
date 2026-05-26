@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { randomQuoteId } from "./Generator.ts";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface Quote {
   id: number;
@@ -19,6 +20,16 @@ export default function App() {
     const targetId = randomQuoteId();
     fetchQuote(targetId);
   };
+
+  const handleGenerate = () => {
+    const nextId = randomQuoteId();
+    fetchQuote(nextId);
+  }
+
+  useEffect(() => {
+    handleGenerate();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
